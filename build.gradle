@@ -1,0 +1,37 @@
+group 'com.midknight'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework:spring-orm:4.2.5.RELEASE")
+    //compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.hibernate:hibernate-core:5.1.5.Final")
+    compile("org.apache.tomcat:tomcat-dbcp:8.0.32")
+    compile("com.h2database:h2:1.4.191")
+    compile("org.hashids:hashids:1.0.1")
+    compile("org.liquibase:liquibase-core:3.5.3")
+    //compile("org.liquibase.ext:liquibase-hibernate4:3.6")
+    testCompile("junit:junit")
+}

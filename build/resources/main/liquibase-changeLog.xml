@@ -1,0 +1,80 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Midknight" id="firstTry">
+        <createTable tableName="food">
+                <column name="user1" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="2nd">
+        <dropTable tableName="food"/>
+        <createTable tableName="food">
+            <column name="name" type="varchar(255)"/>
+            <column name="calories" type="int"/>
+            <column name="dateUpLoaded" type="datetime"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="3rd">
+        <createTable tableName="food">
+            <column name="name" type="varchar(255)"/>
+            <column name="calories" type="int"/>
+            <column name="dateUpLoaded" type="datetime"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="liked" type="boolean"/>
+            <column name="bytes" type="clob"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="4th">
+        <dropTable tableName="food"/>
+        <createTable tableName="food">
+            <column name="id" type="long"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="calories" type="int"/>
+            <column name="dateUpLoaded" type="datetime"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="liked" type="boolean"/>
+            <column name="bytes" type="clob"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="5th">
+        <dropTable tableName="food"/>
+        <createTable tableName="food">
+            <column name="id" type="long"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="calories" type="int"/>
+            <column name="dateUpLoaded" type="timestamp"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="liked" type="boolean"/>
+            <column name="bytes" type="clob"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="6th">
+        <dropTable tableName="food"/>
+        <createTable tableName="food">
+            <column name="id" type="long"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="calories" type="int"/>
+            <column name="dateUpLoaded" type="timestamp"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="location" type="varchar(255)"/>
+            <column name="liked" type="boolean"/>
+            <column name="bytes" type="blob"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="7th">
+        <addAutoIncrement tableName="food" columnName="id" incrementBy="1" startWith="1" columnDataType="long"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

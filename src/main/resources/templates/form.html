@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head('upload')"></head>
+<body>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: flash"></div>
+<div class="container upload">
+    <div class="row">
+        <div class="col s12">
+            <h2 th:text="${heading}">Upload</h2>
+            <div class="subtitle">Upload/Update and share what you ate with friends and family on Facebook, Twitter, and everywhere else.</div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <form th:action="@{${action}}" method="post" th:object="${food}" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="row">
+            <div class="col s12 l8">
+                <div class="file-wrapper">
+                    <input type="file" id="file" name="file"/>
+                    <span class="placeholder" data-placeholder="Choose an image...">Choose an image...</span>
+                    <label for="file" class="button">Browse</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l8">
+                <input type="text" th:field="*{name}" placeholder="Name"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <button th:type="${submit}" type="submit" class="button">Upload</button>
+                <a href="javascript:window.location = document.referrer;" class="button">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:replace="layout :: scripts"></div>
+</body>
+</html>

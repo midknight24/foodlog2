@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head('explore')"></head>
+<body>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: searchbar"></div>
+<div th:replace="layout :: flash"></div>
+<div class="gifs container">
+    <div class="row">
+        <div th:each="food : ${foods}" class="col s12 l4">
+            <a th:href="@{|/foods/${food.id}|}" class="actions">
+                <img th:src="@{|/foods/${food.id}.jpg|}" alt="food" />
+                <form th:action="@{|/foods/${food.id}/like|}" method="post">
+                    <button type="submit" th:class="(${food.liked}? 'un' : '') + 'mark favorite'"></button>
+                </form>
+            </a>
+        </div>
+    </div>
+</div>
+<div th:replace="layout :: scripts"></div>
+</body>
+</html>

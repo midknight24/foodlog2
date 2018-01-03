@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/foodlog.iml" filepath="$PROJECT_DIR$/.idea/modules/foodlog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/foodlog_main.iml" filepath="$PROJECT_DIR$/.idea/modules/foodlog_main.iml" group="foodlog" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/foodlog_test.iml" filepath="$PROJECT_DIR$/.idea/modules/foodlog_test.iml" group="foodlog" />
+    </modules>
+  </component>
+</project>

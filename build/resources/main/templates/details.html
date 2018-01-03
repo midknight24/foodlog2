@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head(${food.name})"></head>
+<body>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: searchbar"></div>
+<div th:replace="layout :: flash"></div>
+<div class="gif-detail container">
+    <div class="frame row">
+        <div class="col s12 actions">
+            <img th:src="@{|/foods/${food.id}.jpg|}" alt="jpg" />
+            <form th:action="@{|/foods/${food.id}/like|}" method="post">
+                <button type="submit" th:class="(${food.liked}? 'un' : '') + 'mark favorite'"></button>
+            </form>
+        </div>
+    </div>
+    <div class="meta row">
+        <div class="col s10 l11 push-l1">
+            <h4 th:text="${food.name}"></h4>
+            <div>
+                <span class="user" th:text="|by ${food.username}|"></span>
+                <div class="actions">
+                    <a th:href="@{|/foods/${food.id}/edit|}">Edit</a>
+                    <form th:action="@{|/foods/${food.id}/delete|}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s2 l1 pull-l11">
+            <img class="circle" th:src="@{/images/me.jpg}" alt="avatar" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 l11 offset-l1">
+            <div class="divider"></div>
+        </div>
+        <div class="col s12 l8 offset-l1">
+            <div class="share">
+                <a class="btn right" href="#">Copy</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout :: scripts"></div>
+</body>
+</html>
