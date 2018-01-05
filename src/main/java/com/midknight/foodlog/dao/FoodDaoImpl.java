@@ -21,7 +21,7 @@ public class FoodDaoImpl implements FoodDao {
     @SuppressWarnings("unchecked")
     public List<Food> findAll() {
         Session session = sessionFactory.openSession();
-        List<Food> foods = session.createCriteria(Food.class).addOrder(Order.asc("dateUpLoaded")).list();
+        List<Food> foods = session.createCriteria(Food.class).addOrder(Order.asc("id")).list();
         session.close();
         return foods;
     }

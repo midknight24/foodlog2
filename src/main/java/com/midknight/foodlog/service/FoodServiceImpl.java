@@ -38,7 +38,6 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public void toggleLike(Food food){
-        //TODO: add setLike to food model
         food.setLiked(!food.isLiked());
         foodDao.save(food);
     }

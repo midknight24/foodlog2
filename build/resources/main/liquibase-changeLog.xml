@@ -75,6 +75,20 @@
         <addAutoIncrement tableName="food" columnName="id" incrementBy="1" startWith="1" columnDataType="long"/>
     </changeSet>
 
-
+    <changeSet author="Midknight" id="8th">
+        <validCheckSum>7:cabea48bedc01bf77942dda0e26f59a0</validCheckSum>
+        <createTable tableName="Role">
+            <column name="id" type="long"/>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Midknight" id="9th">
+        <createTable tableName="User">
+            <column name="id" type="long"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="enabled" type="boolean"/>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
