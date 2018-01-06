@@ -90,5 +90,13 @@
             <column name="enabled" type="boolean"/>
         </createTable>
     </changeSet>
+    <changeSet author="Midknight" id="10th">
+        <addAutoIncrement tableName="Role" columnName="id" incrementBy="1" startWith="1" columnDataType="long"/>
+        <addAutoIncrement tableName="User" columnName="id" incrementBy="1" startWith="1" columnDataType="long"/>
+        <addColumn tableName="User">
+            <column name="role_id" type="long"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="User" constraintName="role_id" referencedColumnNames="id" referencedTableName="Role"/>
+    </changeSet>
 
 </databaseChangeLog>
