@@ -4,6 +4,7 @@ import com.midknight.foodlog.model.Food;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -50,6 +51,16 @@ public class FoodDaoImpl implements FoodDao {
         session.delete(food);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Food> findByUserId(long id){
+        Session session = sessionFactory.openSession();
+        List<Food> foods = session.createCriteria(Food.class)
+                            .add(Restrictions.eq("user_id",id))
+                            .addOrder(Order.asc("id")).list();
+        session.close();
+        return foods;
     }
 
 

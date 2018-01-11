@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .authorizeRequests()
                 .anyRequest().hasRole("USER")
+                .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")

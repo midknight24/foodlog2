@@ -9,6 +9,13 @@ h2 {
     margin-bottom: 0;
 }
 
+.card .card-image img {
+    padding: 20px;
+    height: 100px;
+    width:100%
+
+}
+
 nav {
     background-color: #896bb3;
     box-shadow: none;

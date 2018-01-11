@@ -69,6 +69,16 @@ public class Food {
     private String location;
     private String username = "you";
 
+    private Long userID;
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
     public String getUsername() {
         return username;
     }

@@ -98,5 +98,13 @@
         </addColumn>
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="User" constraintName="role_id" referencedColumnNames="id" referencedTableName="Role"/>
     </changeSet>
+    <changeSet author="Midknight" id="change column name">
+        <renameColumn tableName="user" oldColumnName="name" newColumnName="username"/>
+    </changeSet>
+    <changeSet author="Midknight" id="add user_id for food">
+        <addColumn tableName="food">
+            <column name="user_id" type="long"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

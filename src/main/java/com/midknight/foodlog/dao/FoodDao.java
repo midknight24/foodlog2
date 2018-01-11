@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface FoodDao {
     List<Food> findAll();
+    List<Food> findByUserId(long id);
     Food findById(long id);
     void save(Food food);
     void delete(Food food);
