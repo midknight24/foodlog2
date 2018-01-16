@@ -3,12 +3,15 @@ package com.midknight.foodlog.config;
 import com.midknight.foodlog.service.UserService;
 import com.midknight.foodlog.web.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
@@ -20,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+        //auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
         auth.userDetailsService(userService);
     }
 
@@ -31,9 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .authorizeRequests().antMatchers("/sign_up")
+                .permitAll()
+                .and()
                 .authorizeRequests()
-                .anyRequest().hasRole("USER")
-                .anyRequest().hasRole("ADMIN")
+                .antMatchers("/register")
+                .permitAll()
+                .and()
+                .authorizeRequests()
+                .anyRequest().hasAnyRole("USER","ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -42,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .failureHandler(loginFailureHandler())
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .permitAll()
                 .logoutSuccessUrl("/login");
     }
@@ -55,5 +66,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             request.getSession().setAttribute("flash",new FlashMessage("wrong info to login",FlashMessage.Status.FAILURE));
             response.sendRedirect("/login");
         });
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(10);
     }
 }

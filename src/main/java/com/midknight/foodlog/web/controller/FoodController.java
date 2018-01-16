@@ -1,9 +1,11 @@
 package com.midknight.foodlog.web.controller;
 
+import com.midknight.foodlog.model.User;
 import com.midknight.foodlog.service.FoodService;
 import com.midknight.foodlog.model.Food;
 import com.midknight.foodlog.web.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,9 +28,17 @@ public class FoodController {
     @Autowired
     private FoodService foodService;
 
+//    @RequestMapping(value = "/")
+//    public String listFood(Model model) {
+//        List<Food> foods =foodService.findAll();
+//        model.addAttribute("foods",foods);
+//        return "index";
+//    }
+
     @RequestMapping(value = "/")
-    public String listFood(Model model) {
-        List<Food> foods =foodService.findAll();
+    public String listFood(Model model, Principal principal) {
+        User user = (User)((UsernamePasswordAuthenticationToken)principal).getPrincipal();
+        List<Food> foods =foodService.findByUserId(user.getId());
         model.addAttribute("foods",foods);
         return "index";
     }
@@ -47,21 +58,25 @@ public class FoodController {
 
     // Upload a new food
     @RequestMapping(value = "/foods", method = RequestMethod.POST)
-    public String addFood(Food food, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
-        // TODO: Upload new Food if data is valid
+    public String addFood(Food food, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes, Principal principal) {
+
+        User user = (User)((UsernamePasswordAuthenticationToken)principal).getPrincipal();
+        food.setUserID(user.getId());
+        food.setUsername(user.getUsername());
+        //Upload new Food if data is valid
         foodService.save(food,file);
 
         //Add flash msg for success
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("Food successfully uploaded!", FlashMessage.Status.SUCCESS));
 
-        // TODO: Redirect browser to new food's detail view
+        //Redirect browser to new food's detail view
         return String.format("redirect:/foods/%s",food.getId());
     }
 
     // Form for uploading a new food
     @RequestMapping("/upload")
     public String formNewfood(Model model) {
-        // TODO: Add model attributes needed for new Food upload form
+        //Add model attributes needed for new Food upload form
         model.addAttribute("food",new Food());
         model.addAttribute("categories",foodService.findAll());
         model.addAttribute("action","/foods");
@@ -73,7 +88,7 @@ public class FoodController {
     // Single Food page
     @RequestMapping("/foods/{foodId}")
     public String foodDetails(@PathVariable Long foodId, Model model) {
-        // TODO: Get food whose id is foodId
+        //Get food whose id is foodId
         Food food = foodService.findById(foodId);
 
         model.addAttribute("food", food);
@@ -83,18 +98,18 @@ public class FoodController {
     // Delete an existing Food
     @RequestMapping(value = "/foods/{foodId}/delete", method = RequestMethod.POST)
     public String deletefood(@PathVariable Long foodId, RedirectAttributes redirectAttributes) {
-        // TODO: Delete the food whose id is foodId
+        //Delete the food whose id is foodId
         Food food = foodService.findById(foodId);
         foodService.delete(food);
         redirectAttributes.addFlashAttribute("flash",new FlashMessage("deleted", FlashMessage.Status.SUCCESS));
-        // TODO: Redirect to app root
-        return "redirect:/";
+        //Redirect to app root
+        return "redirect:/home";
     }
 
     // Form for editing an existing food
     @RequestMapping(value = "/foods/{foodId}/edit")
     public String formEditFood(@PathVariable Long foodId, Model model) {
-        // TODO: Add model attributes needed for edit form
+        //Add model attributes needed for edit form
         if(!model.containsAttribute("food")) {
             model.addAttribute("food", foodService.findById(foodId));
         }
@@ -108,10 +123,10 @@ public class FoodController {
     // Update an existing food
     @RequestMapping(value = "/foods/{foodId}", method = RequestMethod.POST)
     public String updatefood(Food food, @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
-        // TODO: Update food if data is valid
+        //Update food if data is valid
         foodService.save(food,file);
         redirectAttributes.addFlashAttribute("flash", new FlashMessage("food successfully uploaded!", FlashMessage.Status.SUCCESS));
-        // TODO: Redirect browser to updated food's detail view
+        //Redirect browser to updated food's detail view
         return String.format("redirect:/foods/%s", food.getId());
     }
 

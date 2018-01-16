@@ -57,7 +57,7 @@ public class FoodDaoImpl implements FoodDao {
     public List<Food> findByUserId(long id){
         Session session = sessionFactory.openSession();
         List<Food> foods = session.createCriteria(Food.class)
-                            .add(Restrictions.eq("user_id",id))
+                            .add(Restrictions.eq("userID",id))
                             .addOrder(Order.asc("id")).list();
         session.close();
         return foods;

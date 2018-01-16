@@ -8,6 +8,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
+
+    public Role(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

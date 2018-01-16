@@ -106,5 +106,29 @@
             <column name="user_id" type="long"/>
         </addColumn>
     </changeSet>
+    <changeSet author="Midknight" id="replace ps with encoded">
+        <update tableName="user">
+            <column name="password">"$2y$10$8LmLF2J0BqBzFa9DTtXSd.knPxwxt55MmlzTVbleBpRbau/9JKsqS"</column>
+            <where>ID = 1</where>
+        </update>
+    </changeSet>
+    <changeSet author="Midknight" id="replace ps with encoded2">
+        <update tableName="user">
+            <column name="password">$2y$10$8LmLF2J0BqBzFa9DTtXSd.knPxwxt55MmlzTVbleBpRbau/9JKsqS</column>
+            <where>ID = 1</where>
+        </update>
+    </changeSet>
+    <changeSet author="Midknight" id="replace ps with encoded3">
+        <update tableName="user">
+            <column name="password">$2y$10$YCKgflkiwUjvuNKFnhPYIeT2GY.nv.df3LY51FVbbQ8QDfOn5kSJG</column>
+            <where>ID = 1</where>
+        </update>
+    </changeSet>
+    <changeSet author="Midknight" id="replace ps with encoded4">
+        <update tableName="user">
+            <column name="password">'$2y$10$VUiVE2llgnvFVTGe/V9/7eHrtIFpn.LAXiZ4Cx3H4oPIAEZpAdEc.'</column>
+            <where>ID = 1</where>
+        </update>
+    </changeSet>
 
 </databaseChangeLog>

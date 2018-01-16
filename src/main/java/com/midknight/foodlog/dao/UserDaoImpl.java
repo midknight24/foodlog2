@@ -1,5 +1,6 @@
 package com.midknight.foodlog.dao;
 
+import com.midknight.foodlog.model.Role;
 import com.midknight.foodlog.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -22,4 +23,12 @@ public class UserDaoImpl implements UserDao{
         return user;
     }
 
+    @Override
+    public void save(User user){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(user);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

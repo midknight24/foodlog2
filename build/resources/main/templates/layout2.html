@@ -16,7 +16,6 @@
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Foodlog</a>
             <ul class="right">
-                <li sec:authentication="name"></li>
                 <li>
                     <form class="logout inline" th:action="@{/logout}" method="post">
                         <button type="submit"><i class="material-icons">power_settings_new</i></button>

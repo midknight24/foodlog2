@@ -41,4 +41,9 @@ public class FoodServiceImpl implements FoodService {
         food.setLiked(!food.isLiked());
         foodDao.save(food);
     }
+
+    @Override
+    public List<Food> findByUserId(Long id){
+        return foodDao.findByUserId(id);
+    }
 }

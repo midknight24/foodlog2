@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Foodlog | Log In</title>
+    <title>Foodlog | Sign Up</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"/>
     <link rel="stylesheet" th:href="@{/static/login_signup.css}"/>
 </head>
@@ -10,39 +10,33 @@
 <body>
 <div id="login-page" class="row">
     <div class="col s12 z-depth-6 card-panel">
-        <form class="login-form" th:action="@{/login}" th:object="${user}" method="post">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <form class="login-form" th:action="@{/register}" method="post" th:object="${user}">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{enabled}" th:value="${activate}"/>
+            <!--<input type="hidden" th:field="*{role.id}" th:value="${roleObj}"/>-->
             <div class="row">
                 <div class="input-field col s12 center">
                     <img th:src="@{/static/images/potatoes.png}" alt="plate" class="responsive-img valign profile-image-login"/>
                 </div>
             </div>
-            <div th:fragment="flash" th:if="${flash != null}" class="container">
-                <div class="message">
-                    <i class="right material-icons" data-close="">close</i>
-                    <div th:classappend="${#strings.toLowerCase(flash.status)}" th:text="${flash.message}" class="flash"></div>
-                </div>
-            </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="mdi-social-person-outline prefix"></i>
-                    <input id="username" type="text" class="validate" th:field="*{username}" placeholder="Username"/>
-                    <!--<label for="username" class="center-align">Username</label>-->
+                    <input id="username" type="text"  th:field="*{username}" class="validate" placeholder="Username"/>
                 </div>
             </div>
             <div class="row margin">
                 <div class="input-field col s12">
                     <i class="mdi-action-lock-outline prefix"></i>
-                    <input id="password" type="password" class="validate" th:field="*{password}" placeholder="Password"/>
-                    <!--<label for="password">Password</label>-->
+                    <input id="password" type="password" th:field="*{password}" class="validate" placeholder="Password"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <button type="submit" class="btn waves-effect waves-light col s12">Log in</button>
+                    <button type="submit" class="btn waves-effect waves-light col s12">Sign Up Now</button>
                 </div>
                 <div class="input-field col s12">
-                    <p class="margin center medium-small sign-up">Don't have an account? <a href="sign_up">Sign up</a></p>
+                    <p class="margin center medium-small sign-up">Already have an account? <a href="login.html">Login</a></p>
                 </div>
             </div>
         </form>

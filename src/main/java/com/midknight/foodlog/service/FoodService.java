@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface FoodService {
     List<Food> findAll();
+    List<Food> findByUserId(Long id);
     Food findById(long id);
     void save(Food food, MultipartFile file);
     void delete(Food food);
